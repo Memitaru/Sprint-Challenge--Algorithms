@@ -24,3 +24,4 @@ If temp top floor - top bottom floor is 1, return the temp top floor as the firs
 
 If it doesn't equal one, find the halfway point between temp top floor and temp bottom floor and repeat until it does equal 1.
         
+The runtime complexity would be O(log(n)) because we are splitting the amount of values to search through each time using a binary search.
