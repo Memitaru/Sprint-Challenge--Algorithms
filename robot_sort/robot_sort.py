@@ -92,26 +92,52 @@ class SortingRobot:
         """
         return self._light == "ON"
 
+    # def sort(self):
+    #     """
+    #     Sort the robot's list.
+    #     """
+    #     while True:
+    #         if not self.light_is_on():
+    #             """Check to see if the light is on. If it's not, turn it on and start sorting. If a sort happens on the way back to the left the light will turn off so the loop can continue."""
+    #             self.set_light_on()
+    #             while self.can_move_right():
+    #                 """ If held item is less than item at position or no item is held, swap """
+    #                 if self.compare_item() == -1 or self.compare_item() == None:
+    #                     self.swap_item()
+    #                 self.move_right()
+    #             while self.can_move_left():
+    #                 if self.compare_item() == 1:
+    #                     self.set_light_off()
+    #                     self.swap_item()
+    #                 self.move_left()
+    #         else:
+    #             print(self._time)
+    #             break
+
     def sort(self):
-        """
-        Sort the robot's list.
-        """
-        while True:
-            if not self.light_is_on():
-                """Check to see if the light is on. If it's not, turn it on and start sorting. If a sort happens on the way back to the left the light will turn off so the loop can continue."""
-                self.set_light_on()
-                while self.can_move_right():
-                    """ If held item is less than item at position or no item is held, swap """
-                    if self.compare_item() == -1 or self.compare_item() == None:
-                        self.swap_item()
-                    self.move_right()
-                while self.can_move_left():
-                    if self.compare_item() == 1:
-                        self.set_light_off()
-                        self.swap_item()
-                    self.move_left()
-            else:
-                break
+        # Check if the light is on. If it's on the sort is done. If it's off, turn it on. While the robot can move left, swap item if current item value is less then 0 and turn the light off. Move right, grab item if there, move left. Repeat for right.
+
+        while not self.light_is_on():
+            self.set_light_on()
+            while self.can_move_left():
+                self.swap_item()
+                self.move_left()
+                if self.compare_item() < 0:
+                    self.swap_item()
+                    self.set_light_off()
+                self.move_right()
+                self.swap_item()
+                self.move_left()
+            while self.can_move_right():
+                self.swap_item()
+                self.move_right()
+                if self.compare_item() > 0:
+                    self.swap_item()
+                    self.set_light_off()
+                self.move_left()
+                self.swap_item()
+                self.move_right()
+        print(self._time)
                 
 """
 Notes:
